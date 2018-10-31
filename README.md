@@ -20,3 +20,9 @@ This is a two-sided marketplace where domestic helpers can get on-boarded direct
 
 - [ ] The code should have regular and frequent git commits and informative commit messages
 
+## Development
+
+This marketplace has two actors
+
+- User (USER)
+- Domestic Helper (HELPER)
