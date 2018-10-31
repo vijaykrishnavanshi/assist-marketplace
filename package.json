@@ -1,0 +1,23 @@
+{
+  "name": "assist-marketplace",
+  "version": "0.5.0",
+  "description": "Assist Marketplace which connects busy users with helpers for paid domestic chores and help",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vijaykrishnavanshi/assist-marketplace.git"
+  },
+  "keywords": [
+    "assist",
+    "marketplace"
+  ],
+  "author": "Vijay Krishnavanshi",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vijaykrishnavanshi/assist-marketplace/issues"
+  },
+  "homepage": "https://github.com/vijaykrishnavanshi/assist-marketplace#readme"
+}
