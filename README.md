@@ -26,3 +26,5 @@ This marketplace has two actors
 
 - User (USER)
 - Domestic Helper (HELPER)
+
+Actors have email as their mode of communication.

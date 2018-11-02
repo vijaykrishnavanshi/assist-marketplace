@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "./node_modules/.bin/eslint . --fix",
-    "test": "npm test"
+    "test": "npm test",
+    "generate-docs": "./node_modules/apidoc/bin/apidoc -i ./ -f \".*\\.route[s]?.js$\" -o docs/"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "apidoc": "^0.17.6",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
