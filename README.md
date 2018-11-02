@@ -4,7 +4,7 @@ This is a two-sided marketplace where domestic helpers can get on-boarded direct
 
 ## Basic Feature
 
-- [ ] Any new member of this application can sign up either as a domestic helper offering their services or as a normal user. You will need to create a complete user login and authentication system
+- [X] Any new member of this application can sign up either as a domestic helper offering their services or as a normal user. You will need to create a complete user login and authentication system
 
 - [ ] A domestic helper will have to go through an on-boarding process which might include things like proving their identity, entering their preferred work areas, their service charges (hourly or weekly or monthly)
 

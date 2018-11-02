@@ -61,34 +61,41 @@
     "description": "<p>This api is used by signup the user using email.</p>",
     "parameter": {
       "fields": {
-        "Parameter": [
+        "body": [
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "email",
             "description": "<p>Email Id of the user.</p>"
           },
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "password",
             "description": "<p>Password.</p>"
           },
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "name",
             "description": "<p>Name of the user.</p>"
           },
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "address",
             "description": "<p>Address of the user.</p>"
+          },
+          {
+            "group": "body",
+            "type": "Object",
+            "optional": false,
+            "field": "location",
+            "description": "<p>(Optional) Coordinates of the user.{lattitude: <lat>, longitude: <long> }</p>"
           }
         ]
       }
