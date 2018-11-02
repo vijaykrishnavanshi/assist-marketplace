@@ -24,7 +24,10 @@ const signup = {
       .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)
       .required(),
     name: Joi.string().optional(),
-    address: Joi.string().optional()
+    address: Joi.string().optional(),
+    location: Joi.object()
+      .keys(["latitude", "longitude"])
+      .optional()
   }
 };
 
@@ -52,7 +55,10 @@ const updateProfile = {
   },
   body: {
     name: Joi.string().optional(),
-    address: Joi.string().optional()
+    address: Joi.string().optional(),
+    location: Joi.object()
+      .keys(["latitude", "longitude"])
+      .optional()
   }
 };
 

@@ -16,10 +16,11 @@ const auth = require("../../lib/auth");
  * @api {post} /signup Signup [POST]
  * @apiGroup Authentication
  * @apiDescription This api is used by signup the user using email.
- * @apiParam {String} email Email Id of the user.
- * @apiParam {String} password Password.
- * @apiParam {String} name Name of the user.
- * @apiParam {String} address Address of the user.
+ * @apiParam (body) {String} email Email Id of the user.
+ * @apiParam (body) {String} password Password.
+ * @apiParam (body) {String} name Name of the user.
+ * @apiParam (body) {String} address Address of the user.
+ * @apiParam (body) {Object} location (Optional) Coordinates of the user.{lattitude: <lat>, longitude: <long> }
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 201 OK
  *     {

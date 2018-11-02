@@ -7,8 +7,12 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   name: { type: String, default: "" },
   address: { type: String, default: "" },
+  location: {
+    type: { type: String, default: "Point" },
+    coordinates: { type: Array, required: true }
+  },
 
-  resetToken: { type: String, default: "" },
+  role: { type: String, enum: ["USER", "HELPER"] },
 
   // system generated
   created: {

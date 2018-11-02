@@ -128,6 +128,9 @@ _user.updateProfile = function updateProfile(userData, payloadData) {
       .then(user => {
         user.name = payloadData.name || user.name || "";
         user.address = payloadData.address || user.address || "";
+        user.location = user.location || {};
+        user.location.coordinates =
+          user.location.coordinates || user.location.coordinates || [];
         return user.save();
       })
       .then(data => {
