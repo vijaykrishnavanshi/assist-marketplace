@@ -16,7 +16,7 @@ This is a two-sided marketplace where domestic helpers can get on-boarded direct
 
 - [X] Once a helper accepts an offer to work, the user who offered the work should also get an email notification
 
-- [ ] The code should have adequate test coverage
+- [X] The code should have adequate test coverage
 
 - [X] The code should have regular and frequent git commits and informative commit messages
 
@@ -28,3 +28,37 @@ This marketplace has two actors
 - Domestic Helper (HELPER)
 
 Actors have email as their mode of communication.
+
+## Run the project locally
+
+Run the following command and the APIs will the available locally for testing and development.
+
+```closure
+git clone https://github.com/vijaykrishnavanshi/assist-marketplace.git
+cd assist-marketplace
+npm install
+npm start
+```
+
+## Lint Project
+
+```closure
+npm run lint  # for cheking the lint error
+npm run lint-fix # for fixing the minor lint error
+```
+
+## Run Tests
+
+Used [Mocha](https://mochajs.org/)
+
+```closure
+npm run test  # for running tests
+```
+
+## Generate Documentation
+
+Used [API Docs](http://apidocjs.com/)
+
+```closure
+npm run generate-docs  # for generating documentation
+```

@@ -15,6 +15,12 @@ dotenv.config();
 _hire.search = async function(payloadData) {
   logger.info(payloadData);
   const criteria = {};
+  if (payloadData.term) {
+    criteria.name = {
+      $regex: payloadData.term || "",
+      $options: "gi"
+    };
+  }
   const projection = {};
   const option = {
     lean: true

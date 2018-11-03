@@ -1,26 +1,16 @@
 const assert = require("assert");
 const HireController = require("../hire.controller");
 
-describe("Dummy Controller", function() {
-  describe("#get()", function() {
-    it("should error when no data is present in the db", function() {
-      const queryData = {
-        status: true
-      };
-      HireController.get(queryData).catch(err => {
-        assert.equal(err, new Error("Data not found"));
-      });
-    });
-  });
-  describe("#post()", function() {
-    it("should not create data if body is empty", function() {
-      const queryData = {};
-      HireController.post(queryData)
+describe("Hire Controller", function() {
+  describe("#search()", function() {
+    it("should not error when no param is passed", function() {
+      const payloadData = {};
+      return HireController.search(payloadData)
         .then(data => {
-          assert.not.exist(data);
+          assert.greater(data.length, 0);
         })
         .catch(err => {
-          assert.exist(err);
+          assert.equal(err, null);
         });
     });
   });

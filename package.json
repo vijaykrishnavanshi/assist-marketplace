@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "lint": "./node_modules/.bin/eslint . --fix",
-    "test": "npm test",
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "lint-fix": "./node_modules/eslint/bin/eslint.js . --fix",
+    "test": "mocha --timeout 5000",
     "generate-docs": "./node_modules/apidoc/bin/apidoc -i ./ -f \".*\\.route[s]?.js$\" -o docs/"
   },
   "repository": {
