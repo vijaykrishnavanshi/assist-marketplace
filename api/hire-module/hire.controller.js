@@ -5,6 +5,7 @@
  */
 const Hire = require("./hire");
 const User = require("../user-module/user");
+const Notify = require("../common/notification");
 const { logger } = require("../../utils");
 const dotenv = require("dotenv");
 const _hire = {};
@@ -25,6 +26,16 @@ _hire.search = async function(payloadData) {
 _hire.hireAssist = async function(payloadData) {
   logger.info(payloadData);
   const hire = await new Hire(payloadData).save();
+  const helper = await User.findById(payloadData.helper);
+  const payload = {
+    email: helper.email,
+    subject: "You are requested for work",
+    message: `Can you please come for work from ${hire.start} to ${hire.end}.`
+  };
+  Notify(payload).then(
+    response => logger.info(response),
+    error => logger.error(error)
+  );
   if (hire) {
     return hire.toObject();
   } else {
@@ -77,6 +88,18 @@ _hire.hireStatus = async function(userData, payloadData) {
     if (!(foundHire && foundHire[0])) {
       hire.status = payloadData.status || hire.status;
       const savedHire = await hire.save();
+      const client = await User.findById(hire.client);
+      const payload = {
+        email: client.email,
+        subject: "Helper has updated the status",
+        message: `He has ${hire.status} for work from ${hire.start} to ${
+          hire.end
+        }.`
+      };
+      Notify(payload).then(
+        response => logger.info(response),
+        error => logger.error(error)
+      );
       return savedHire.toObject();
     } else {
       throw new Error("Unable to accept the request of same time");
