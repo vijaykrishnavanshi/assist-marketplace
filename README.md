@@ -10,7 +10,7 @@ This is a two-sided marketplace where domestic helpers can get on-boarded direct
 
 - [ ] The normal users will see a list of domestic helpers available in their area and will be able to sort them based on various filters
 
-- [ ] Once the users have selected a helper, they can make them an offer to work 
+- [ ] Once the users have selected a helper, they can make them an offer to work.
 
 - [ ] The helpers will get an email notification, and can accept or reject offers. The helpers should be able to choose only one offer for a specified time period. The application should restrict them from double booking
 
