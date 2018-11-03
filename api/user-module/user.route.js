@@ -151,8 +151,11 @@ router.route("/login").post(validate(validation.login), (req, res) => {
  *        "success": "true",
  *        "message": "Success",
  *        "data": {
- *          "email": String,
- *          "address": String
+ *          email: <email>,
+ *          name: <name>,
+ *          address: <address>,
+ *          role: <role>,
+ *          service: <services>
  *        }
  *     }
  *
@@ -212,7 +215,13 @@ router
    *     {
    *        "success": "true",
    *        "message": "Success",
-   *        "data": {}
+   *        "data": {
+   *          email: <email>,
+   *          name: <name>,
+   *          address: <address>,
+   *          role: <role>,
+   *          service: <services>
+   *        }
    *     }
    *
    * @apiErrorExample Error-Response 403:
@@ -257,6 +266,73 @@ router
         logger.error(error);
         response.success = false;
         response.message = error.message;
+        return res.status(403).json(response);
+      });
+  });
+
+/**
+ * @api {post} /helper-onboarding Onboarding Helper [POST]
+ * @apiGroup Authentication
+ * @apiDescription This api is used after the user has signed up on our platform using email.
+ * @apiParam (body) {Array} service (Optional) Services provided by the user.
+ * @apiParam (body) {String} photoId (Optional) photo link of the user.
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 201 OK
+ *     {
+ *        "success": "true",
+ *        "message": "Enjoy your token !!",
+ *        "data": {
+ *          email: <email>,
+ *          name: <name>,
+ *          address: <address>,
+ *          role: <role>,
+ *          service: <services>
+ *        }
+ *     }
+ *
+ * @apiErrorExample Error-Response 403:
+ *     HTTP/1.1 403 Unable to signup.
+ *     {
+ *        "success": "false",
+ *        "message": "Unable to signup",
+ *        "data": {}
+ *     }
+ * @apiErrorExample Error-Response 500:
+ *     HTTP/1.1 500 Error on server side.
+ *     {
+ *        "success": "false",
+ *        "message": "Something went wrong",
+ *        "data": {}
+ *     }
+ */
+
+router
+  .route("/helper-onboarding")
+  .post(validate(validation.helperOnboarding), (req, res) => {
+    // send only the data that is required by the controller
+    const response = {
+      success: false,
+      message: "",
+      data: {}
+    };
+    logger.info(req.body);
+    UserController.helperOnboarding(req.body)
+      .then(userData => {
+        if (!userData) {
+          response.success = false;
+          response.message = "Something went wrong";
+          return res.status(500).json(response);
+        } else {
+          response.success = true;
+          response.message = "Success";
+          response.data = userData;
+          return res.status(201).json(response);
+        }
+      })
+      .catch(err => {
+        logger.error(err);
+        response.success = false;
+        response.message = err.message;
         return res.status(403).json(response);
       });
   });

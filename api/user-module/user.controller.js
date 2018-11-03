@@ -94,27 +94,27 @@ _user.login = function(payloadData) {
 };
 
 // Get Particular User Profile
-_user.getProfile = function(userData) {
-  return new Promise((resolve, reject) => {
-    const criteria = {
-      _id: userData._id
-    };
-    const projection = {
-      _id: 0,
-      password: 0,
-      created: 0
-    };
-    const option = {
-      lean: true
-    };
-    User.findOne(criteria, projection, option)
-      .then(data => {
-        resolve(data);
-      })
-      .catch(err => {
-        reject(err);
-      });
+_user.getProfile = async function(userData) {
+  const criteria = {
+    _id: userData._id
+  };
+  const projection = {
+    _id: 0,
+    password: 0,
+    created: 0
+  };
+  const option = {
+    lean: true
+  };
+  const user = await User.findOne(criteria, projection, option).catch(error => {
+    utils.logger.error(error);
+    return null;
   });
+  if (user) {
+    return user;
+  } else {
+    throw new Error("No user found");
+  }
 };
 
 // Get Particular User Profile
@@ -132,7 +132,8 @@ _user.updateProfile = async function updateProfile(userData, payloadData) {
   user.location = user.location || {};
   user.location.coordinates =
     user.location.coordinates || user.location.coordinates || [];
-  user.service = payloadData.service || user.service;
+  user.service = payloadData.service || user.service || [];
+  user.photoId = payloadData.photoId || user.photoId || "";
   return user.save();
 };
 

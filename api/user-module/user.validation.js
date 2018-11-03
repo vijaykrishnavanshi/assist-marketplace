@@ -14,7 +14,9 @@ const strictChecking = {
   allowUnknownCookies: false
 };
 
-const signup = {
+const _validation = {};
+
+_validation.signup = {
   options: strictChecking,
   body: {
     email: Joi.string()
@@ -31,7 +33,7 @@ const signup = {
   }
 };
 
-const login = {
+_validation.login = {
   options: strictChecking,
   body: {
     email: Joi.string()
@@ -41,14 +43,14 @@ const login = {
   }
 };
 
-const getProfile = {
+_validation.getProfile = {
   options: strictChecking,
   headers: {
     authorization: Joi.string().required()
   }
 };
 
-const updateProfile = {
+_validation.updateProfile = {
   options: strictChecking,
   headers: {
     authorization: Joi.string().required()
@@ -62,7 +64,18 @@ const updateProfile = {
   }
 };
 
-const forgotPassword = {
+_validation.helperOnboarding = {
+  options: strictChecking,
+  headers: {
+    authorization: Joi.string().required()
+  },
+  body: {
+    service: Joi.array().optional(),
+    photoId: Joi.string().optional()
+  }
+};
+
+_validation.forgotPassword = {
   options: strictChecking,
   body: {
     email: Joi.string()
@@ -72,14 +85,14 @@ const forgotPassword = {
   }
 };
 
-const verifyToken = {
+_validation.verifyToken = {
   options: strictChecking,
   body: {
     token: Joi.string().required()
   }
 };
 
-const changePassword = {
+_validation.changePassword = {
   options: strictChecking,
   body: {
     token: Joi.string().required(),
@@ -89,12 +102,4 @@ const changePassword = {
   }
 };
 
-module.exports = {
-  signup,
-  login,
-  getProfile,
-  updateProfile,
-  forgotPassword,
-  verifyToken,
-  changePassword
-};
+module.exports = _validation;
