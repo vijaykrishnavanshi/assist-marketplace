@@ -62,3 +62,5 @@ Used [API Docs](http://apidocjs.com/)
 ```closure
 npm run generate-docs  # for generating documentation
 ```
+Link to Documentation: https://vijaykrishnavanshi.github.io/assist-marketplace/
+
