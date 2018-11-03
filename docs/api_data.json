@@ -1,6 +1,60 @@
 [
   {
     "type": "post",
+    "url": "/helper-onboarding",
+    "title": "Onboarding Helper [POST]",
+    "group": "Authentication",
+    "description": "<p>This api is used after the user has signed up on our platform using email.</p>",
+    "parameter": {
+      "fields": {
+        "body": [
+          {
+            "group": "body",
+            "type": "Array",
+            "optional": false,
+            "field": "service",
+            "description": "<p>(Optional) Services provided by the user.</p>"
+          },
+          {
+            "group": "body",
+            "type": "String",
+            "optional": false,
+            "field": "photoId",
+            "description": "<p>(Optional) photo link of the user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Enjoy your token !!\",\n   \"data\": {\n     email: <email>,\n     name: <name>,\n     address: <address>,\n     role: <role>,\n     service: <services>\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response 403:",
+          "content": "HTTP/1.1 403 Unable to signup.\n{\n   \"success\": \"false\",\n   \"message\": \"Unable to signup\",\n   \"data\": {}\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response 500:",
+          "content": "HTTP/1.1 500 Error on server side.\n{\n   \"success\": \"false\",\n   \"message\": \"Something went wrong\",\n   \"data\": {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/user-module/user.route.js",
+    "groupTitle": "Authentication",
+    "name": "PostHelperOnboarding"
+  },
+  {
+    "type": "post",
     "url": "/login",
     "title": "Login [POST]",
     "group": "Authentication",
@@ -129,6 +183,182 @@
     "name": "PostSignup"
   },
   {
+    "type": "post",
+    "url": "/hire-assist",
+    "title": "Hire [POST]",
+    "group": "Hire",
+    "description": "<p>This api is used by user to hire the Helper on assist merket place.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "client",
+            "description": "<p>Client MongoID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "helper",
+            "description": "<p>helper MongoID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "start",
+            "description": "<p>start date time.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "end",
+            "description": "<p>end date time.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Hire is requested to the helper.\",\n   \"data\": {\n     client: <client-mongoID>,\n     helper: <helper-mongoID>,\n     start: <start-date-in-utc>,\n     end: <end-date-in-utc>,\n     status: <status>\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response 403:",
+          "content": "HTTP/1.1 403 Unable to search.\n{\n  \"success\": \"false\",\n  \"message\": \"Unable to login\",\n  \"data\": {}\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response 500:",
+          "content": "HTTP/1.1 500 Error on server side.\n{\n  \"success\": \"false\",\n  \"message\": \"Something went wrong\",\n  \"data\": {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/hire-module/hire.route.js",
+    "groupTitle": "Hire",
+    "name": "PostHireAssist"
+  },
+  {
+    "type": "post",
+    "url": "/hire-status",
+    "title": "Hire Status [POST]",
+    "group": "Hire",
+    "description": "<p>This api is used by the user or helper on assist merket place.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hireId",
+            "description": "<p>Hire MongoID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>status of Hire [&quot;ACCEPTED&quot;, &quot;REJECTED&quot;].</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Hire status is updated.\",\n   \"data\": {\n     hireId: <hire-mongoID>,\n     status: <status>\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response 403:",
+          "content": "HTTP/1.1 403 Unable to search.\n{\n  \"success\": \"false\",\n  \"message\": \"Unable to login\",\n  \"data\": {}\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response 500:",
+          "content": "HTTP/1.1 500 Error on server side.\n{\n  \"success\": \"false\",\n  \"message\": \"Something went wrong\",\n  \"data\": {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/hire-module/hire.route.js",
+    "groupTitle": "Hire",
+    "name": "PostHireStatus"
+  },
+  {
+    "type": "post",
+    "url": "/search",
+    "title": "Search [POST]",
+    "group": "Hire",
+    "description": "<p>This api is used by user to search for the Helper on assist merket place.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "term",
+            "description": "<p>partial name/email/address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "coordinates",
+            "description": "<p>location based coordinate array [<lat>, <long>].</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Enjoy your token !!\",\n   \"data\": {\n     helperList: [{\n       email: \"<email>\",\n       name: \"<name>\",\n       address: <address>,\n       location: <location>\n     }]\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response 403:",
+          "content": "HTTP/1.1 403 Unable to search.\n{\n  \"success\": \"false\",\n  \"message\": \"Unable to login\",\n  \"data\": {}\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response 500:",
+          "content": "HTTP/1.1 500 Error on server side.\n{\n  \"success\": \"false\",\n  \"message\": \"Something went wrong\",\n  \"data\": {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/hire-module/hire.route.js",
+    "groupTitle": "Hire",
+    "name": "PostSearch"
+  },
+  {
     "type": "get",
     "url": "/profile",
     "title": "Profile [GET]",
@@ -151,7 +381,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 201 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Success\",\n   \"data\": {\n     \"email\": String,\n     \"address\": String\n   }\n}",
+          "content": "HTTP/1.1 201 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Success\",\n   \"data\": {\n     email: <email>,\n     name: <name>,\n     address: <address>,\n     role: <role>,\n     service: <services>\n   }\n}",
           "type": "json"
         }
       ]
@@ -211,7 +441,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 201 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Success\",\n   \"data\": {}\n}",
+          "content": "HTTP/1.1 201 OK\n{\n   \"success\": \"true\",\n   \"message\": \"Success\",\n   \"data\": {\n     email: <email>,\n     name: <name>,\n     address: <address>,\n     role: <role>,\n     service: <services>\n   }\n}",
           "type": "json"
         }
       ]
