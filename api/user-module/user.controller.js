@@ -20,6 +20,7 @@ _user.signup = function(payloadData) {
       // Hash Password
       var data = {};
       payloadData.password = utils.helpers.hash(payloadData.password);
+      if (payloadData.role == "HELPER") payloadData.onboarding = true;
       const user = new User(payloadData);
       user
         .save()
@@ -74,13 +75,15 @@ _user.login = function(payloadData) {
           data["id"] = user._id.toString();
           data["email"] = user.email;
           data["name"] = user.name;
+          data["onboarding"] = user.onboarding;
           return TokenManager.signToken(data);
         })
         .then(token => {
           // return the information including token as JSON
           resolve({
             token: token,
-            id: data["id"]
+            id: data["id"],
+            onboarding: data["onboarding"] || false
           });
         })
         .catch(err => {
@@ -115,33 +118,41 @@ _user.getProfile = function(userData) {
 };
 
 // Get Particular User Profile
-_user.updateProfile = function updateProfile(userData, payloadData) {
-  return new Promise((resolve, reject) => {
-    const criteria = {
-      _id: userData._id
-    };
-    const projection = {
-      password: 0
-    };
-    const option = {};
-    User.findOne(criteria, projection, option)
-      .then(user => {
-        user.name = payloadData.name || user.name || "";
-        user.address = payloadData.address || user.address || "";
-        user.location = user.location || {};
-        user.location.coordinates =
-          user.location.coordinates || user.location.coordinates || [];
-        return user.save();
-      })
-      .then(data => {
-        data = data.toObject();
-        if (data.password) delete data.password;
-        resolve(data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+_user.updateProfile = async function updateProfile(userData, payloadData) {
+  const criteria = {
+    _id: userData._id
+  };
+  const projection = {
+    password: 0
+  };
+  const option = {};
+  const user = await User.findOne(criteria, projection, option);
+  user.name = payloadData.name || user.name || "";
+  user.address = payloadData.address || user.address || "";
+  user.location = user.location || {};
+  user.location.coordinates =
+    user.location.coordinates || user.location.coordinates || [];
+  user.service = payloadData.service || user.service;
+  return user.save();
+};
+
+_user.helperOnboarding = async function(userData, payloadData) {
+  const criteria = {
+    _id: userData._id
+  };
+  const projection = {
+    password: 0
+  };
+  const option = {};
+  const user = await User.findOne(criteria, projection, option);
+  if (!user.onboarding) {
+    throw new Error("No onboarding process required or it is already done");
+  } else {
+    user.service = payloadData.service || user.service || [];
+    user.photoId = payloadData.photoId || user.photoId || "";
+    user.onboarding = false;
+    return user.save();
+  }
 };
 
 //Forgot Password
