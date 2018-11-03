@@ -2,6 +2,10 @@
 
 This is a two-sided marketplace where domestic helpers can get on-boarded directly or through an agency. On the other hand, the users will be able to find an appropriate helper based on a number of different criterion
 
+## Scope of Assignment
+
+This assignment is tailored towards busy professionals from metro cities who spend more than 10-12 hours a day at their work or regular commute. These professionals presumably don’t have enough time to clean their houses due to their busy schedules and hence would like to avail of a service which can connect them with domestic helpers online. You can choose any frameworks from the following languages - Java, Javascript, Python
+
 ## Basic Feature
 
 - [X] Any new member of this application can sign up either as a domestic helper offering their services or as a normal user. You will need to create a complete user login and authentication system
