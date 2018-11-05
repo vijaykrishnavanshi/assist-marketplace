@@ -29,6 +29,16 @@ _hire.search = async function(payloadData) {
       $options: "gi"
     };
   }
+
+  if (payloadData.coordinates) {
+    criteria.location = {
+      $geometry: {
+        type: "Point",
+        coordinates: payloadData.coordinates || []
+      }
+    };
+  }
+
   const projection = {};
   const option = {
     lean: true
