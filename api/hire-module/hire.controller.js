@@ -20,6 +20,14 @@ _hire.search = async function(payloadData) {
       $regex: payloadData.term || "",
       $options: "gi"
     };
+    criteria.email = {
+      $regex: payloadData.term || "",
+      $options: "gi"
+    };
+    criteria.address = {
+      $regex: payloadData.term || "",
+      $options: "gi"
+    };
   }
   const projection = {};
   const option = {
